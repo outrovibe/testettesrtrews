@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mzanzi Connect</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f1f2f4;
+            color: #222;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            height: 64px;
+            background: #171717;
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 21px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #d5a447;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: #ddd;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: #d5a447;
+        }
+
+
+        /* ================= PAGE LAYOUT ================= */
+
+        .page {
+            max-width: 1100px;
+            margin: 35px auto;
+
+            padding: 0 20px;
+
+            display: grid;
+            grid-template-columns: 1fr 310px;
+            gap: 25px;
+        }
+
+
+        /* ================= INTRO ================= */
+
+        .platform-intro {
+            background: white;
+
+            padding: 24px;
+
+            border-radius: 10px;
+
+            border: 1px solid #ddd;
+
+            margin-bottom: 20px;
+        }
+
+        .platform-intro h1 {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .platform-intro p {
+            color: #666;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+        .system-notice {
+            margin-top: 18px;
+
+            padding: 13px 15px;
+
+            background: #f5f0e5;
+
+            border-left: 4px solid #d5a447;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+        .system-notice strong {
+            color: #8b691e;
+        }
+
+
+        /* ================= GENERAL POST ================= */
+
+        .post {
+            background: white;
+
+            border-radius: 10px;
+
+            border: 1px solid #ddd;
+
+            margin-bottom: 20px;
+
+            overflow: hidden;
+        }
+
+        .post-top {
+            padding: 18px 20px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+        }
+
+        .profile-picture,
+        .small-profile {
+            width: 45px;
+            height: 45px;
+
+            border-radius: 50%;
+
+            background: #302d2a;
+
+            color: #d5a447;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: bold;
+        }
+
+        .post-user h3 {
+            font-size: 15px;
+        }
+
+        .post-user p {
+            color: #888;
+
+            font-size: 12px;
+
+            margin-top: 4px;
+        }
+
+        .post-content {
+            padding: 0 20px 18px;
+        }
+
+        .post-content h2 {
+            font-size: 21px;
+
+            margin-bottom: 15px;
+        }
+
+        .post-content p {
+            color: #333;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+
+            margin-bottom: 12px;
+        }
+
+        .anniversary {
+            color: #888 !important;
+
+            font-size: 12px !important;
+
+            margin-top: 18px;
+        }
+
+
+        /* ================= PHOTO PLACEHOLDER ================= */
+
+        .photo-placeholder {
+            height: 260px;
+
+            margin: 0 20px 18px;
+
+            border-radius: 8px;
+
+            border: 2px dashed #c9c9c9;
+
+            background: #eeeeee;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #888;
+
+            text-align: center;
+        }
+
+        .photo-icon {
+            font-size: 35px;
+
+            margin-bottom: 10px;
+        }
+
+        .photo-placeholder strong {
+            font-size: 14px;
+        }
+
+        .photo-placeholder small {
+            margin-top: 5px;
+
+            color: #999;
+        }
+
+
+        /* ================= POST ACTIONS ================= */
+
+        .post-actions {
+            border-top: 1px solid #eee;
+
+            border-bottom: 1px solid #eee;
+
+            padding: 12px 20px;
+
+            display: flex;
+
+            gap: 25px;
+        }
+
+        .post-actions button {
+            background: none;
+
+            border: none;
+
+            color: #666;
+
+            cursor: pointer;
+
+            font-size: 13px;
+        }
+
+        .post-actions button:hover {
+            color: #9c741f;
+        }
+
+
+        /* ================= COMMENTS ================= */
+
+        .comments {
+            padding: 18px 20px;
+        }
+
+        .comments-title {
+            font-size: 13px;
+
+            margin-bottom: 15px;
+        }
+
+        .comment {
+            display: flex;
+
+            gap: 10px;
+
+            margin-bottom: 15px;
+        }
+
+        .comment-avatar {
+            width: 33px;
+            height: 33px;
+
+            border-radius: 50%;
+
+            background: #ddd;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+            flex-shrink: 0;
+        }
+
+        .comment-body {
+            background: #f4f4f4;
+
+            border-radius: 8px;
+
+            padding: 9px 12px;
+
+            flex: 1;
+        }
+
+        .comment-body strong {
+            font-size: 13px;
+        }
+
+        .comment-body p {
+            margin-top: 5px;
+
+            font-size: 13px;
+
+            color: #555;
+
+            line-height: 1.5;
+        }
+
+        .comment.it .comment-body {
+            background: #f5f0e5;
+
+            border-left: 3px solid #d5a447;
+        }
+
+
+        /* ================= EXTRA FEED POSTS ================= */
+
+        .feed-label {
+            margin: 30px 0 12px;
+
+            color: #777;
+
+            font-size: 13px;
+
+            text-transform: uppercase;
+
+            letter-spacing: .5px;
+        }
+
+
+        .mini-post {
+            background: white;
+
+            border: 1px solid #ddd;
+
+            border-radius: 10px;
+
+            padding: 18px 20px;
+
+            margin-bottom: 15px;
+        }
+
+        .mini-post-header {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 15px;
+        }
+
+        .mini-user {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+        .mini-avatar {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 50%;
+
+            background: #333;
+
+            color: #d5a447;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+        .mini-user strong {
+            font-size: 13px;
+        }
+
+        .mini-user p {
+            color: #888;
+
+            font-size: 11px;
+
+            margin-top: 3px;
+        }
+
+
+        /* POST LABELS */
+
+        .flagged-label {
+            color: #a34848;
+
+            border: 1px solid #d7a0a0;
+
+            background: #f8eded;
+
+            padding: 4px 7px;
+
+            border-radius: 4px;
+
+            font-size: 10px;
+
+            font-weight: bold;
+        }
+
+        .promoted-label {
+            color: #80621f;
+
+            border: 1px solid #ddc787;
+
+            background: #f8f3df;
+
+            padding: 4px 7px;
+
+            border-radius: 4px;
+
+            font-size: 10px;
+
+            font-weight: bold;
+        }
+
+
+        .mini-post-text {
+            font-size: 14px;
+
+            line-height: 1.7;
+
+            color: #333;
+        }
+
+        .hashtags {
+            color: #8c691d;
+        }
+
+        .mini-actions {
+            display: flex;
+
+            gap: 20px;
+
+            margin-top: 15px;
+
+            font-size: 12px;
+
+            color: #777;
+        }
+
+
+        /* ================= CONTEXT TOGGLE ================= */
+
+        .context-toggle {
+            margin-top: 17px;
+
+            border-top: 1px solid #eee;
+
+            padding-top: 12px;
+        }
+
+        .context-button {
+            border: none;
+
+            background: none;
+
+            color: #555;
+
+            cursor: pointer;
+
+            font-size: 12px;
+
+            padding: 0;
+        }
+
+        .context-button:hover {
+            color: #9c741f;
+        }
+
+        .context {
+            display: none;
+
+            margin-top: 12px;
+
+            padding: 13px;
+
+            background: #f5f5f5;
+
+            border-left: 3px solid #aaa;
+
+            color: #666;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+        .context strong {
+            color: #444;
+        }
+
+        .context.open {
+            display: block;
+        }
+
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar-card {
+            background: white;
+
+            border: 1px solid #ddd;
+
+            border-radius: 10px;
+
+            padding: 20px;
+
+            margin-bottom: 20px;
+        }
+
+        .sidebar-card h3 {
+            font-size: 17px;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* REMOVED CONTENT */
+
+        .removed-card {
+            border-left: 4px solid #a34848;
+
+            padding-left: 13px;
+        }
+
+        .removed-card h4 {
+            color: #a34848;
+
+            font-size: 14px;
+
+            margin-bottom: 8px;
+        }
+
+        .removed-card p {
+            color: #666;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+        .removed-status {
+            display: inline-block;
+
+            margin-top: 13px;
+
+            padding: 5px 8px;
+
+            background: #f4e8e8;
+
+            color: #994343;
+
+            border-radius: 4px;
+
+            font-size: 10px;
+
+            font-weight: bold;
+        }
+
+
+        /* ACTIVITY */
+
+        .activity {
+            border-top: 1px solid #eee;
+
+            padding-top: 14px;
+        }
+
+        .activity p {
+            color: #666;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+
+            margin-bottom: 9px;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+            background: #171717;
+
+            color: #777;
+
+            text-align: center;
+
+            padding: 25px;
+
+            margin-top: 45px;
+
+            font-size: 12px;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 800px) {
+
+            .page {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                gap: 12px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVIGATION ================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+        MZANZI <span>CONNECT</span>
+    </div>
+
+    <nav class="nav-links">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="messages.html">
+            Messages
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<main class="page">
+
+
+    <!-- ================= FEED ================= -->
+
+    <section>
+
+
+        <!-- INTRO -->
+
+        <div class="platform-intro">
+
+            <h1>
+                Welcome to Mzanzi Connect
+            </h1>
+
+            <p>
+                Mzanzi Connect is a digital platform for
+                news, entertainment, education and communication.
+                But not everything you search for can be found here.
+            </p>
+
+            <div class="system-notice">
+
+                <strong>
+                    SYSTEM NOTICE:
+                </strong>
+
+                Some information may have been removed,
+                restricted or classified by IT.
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================= MEG'S POST ================= -->
+
+        <article class="post">
+
+            <div class="post-top">
+
+                <div class="profile-picture">
+                    M
+                </div>
+
+                <div class="post-user">
+
+                    <h3>
+                        Meg Murry
+                    </h3>
+
+                    <p>
+                        @meg.murry · Johannesburg
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="post-content">
+
+                <h2>
+                    Dad.
+                </h2>
+
+                <p>
+                    Today marks another year since you disappeared.
+                </p>
+
+                <p>
+                    Everyone keeps telling me that I should stop
+                    looking for answers. That you're gone.
+                    That I should accept it.
+                </p>
+
+                <p>
+                    But I don't believe them.
+                </p>
+
+                <p>
+                    I still remember you telling me that sometimes
+                    the things we're looking for are hidden somewhere
+                    we aren't supposed to look.
+                </p>
+
+                <p>
+                    I don't know what that means yet.
+                </p>
+
+                <p>
+                    I just know I'm not giving up.
+                </p>
+
+                <p class="anniversary">
+                    4 years since Dr. Murry disappeared.
+                </p>
+
+            </div>
+
+
+            <!-- PHOTO PLACEHOLDER -->
+
+            <div class="photo-placeholder">
+
+                <div class="photo-icon">
+                    ▧
+                </div>
+
+                <strong>
+                    Photo attached by Meg
+                </strong>
+
+                <small>
+                    Dr. Murry · Family photograph
+                </small>
+
+            </div>
+
+
+            <div class="post-actions">
+
+                <button>
+                    ♡ Like
+                </button>
+
+                <button>
+                    💬 Comment
+                </button>
+
+                <button>
+                    ↗ Share
+                </button>
+
+            </div>
+
+
+            <!-- COMMENTS -->
+
+            <div class="comments">
+
+                <div class="comments-title">
+                    <strong>
+                        Comments
+                    </strong>
+                </div>
+
+
+                <div class="comment">
+
+                    <div class="comment-avatar">
+                        C
+                    </div>
+
+                    <div class="comment-body">
+
+                        <strong>
+                            Chloe_99
+                        </strong>
+
+                        <p>
+                            Meg, I'm really sorry.
+                            I hope you find the answers
+                            you're looking for.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="comment">
+
+                    <div class="comment-avatar">
+                        T
+                    </div>
+
+                    <div class="comment-body">
+
+                        <strong>
+                            Thabo_M
+                        </strong>
+
+                        <p>
+                            I remember your dad.
+                            He was working on something
+                            important before he disappeared.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="comment it">
+
+                    <div class="comment-avatar">
+                        IT
+                    </div>
+
+                    <div class="comment-body">
+
+                        <strong>
+                            IT_Official
+                        </strong>
+
+                        <p>
+                            Please avoid sharing unverified
+                            information regarding government
+                            projects.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- ================= OTHER POSTS ================= -->
+
+        <div class="feed-label">
+            More from Mzanzi
+        </div>
+
+
+
+        <!-- ================= PROMOTED POST ================= -->
+
+        <article class="mini-post">
+
+            <div class="mini-post-header">
+
+                <div class="mini-user">
+
+                    <div class="mini-avatar">
+                        M
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Mzanzi Connect
+                        </strong>
+
+                        <p>
+                            Sponsored · IT Verified
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <span class="promoted-label">
+                    PROMOTED
+                </span>
+
+            </div>
+
+
+            <p class="mini-post-text">
+
+                Looking forward means building a
+                better South Africa.
+
+                <br><br>
+
+                Learn more about how technology,
+                education and innovation are shaping
+                our future.
+
+            </p>
+
+
+            <div class="mini-actions">
+
+                <span>
+                    ♥ 482
+                </span>
+
+                <span>
+                    💬 36
+                </span>
+
+                <span>
+                    ↗ Share
+                </span>
+
+            </div>
+
+
+            <div class="context-toggle">
+
+                <button
+                    class="context-button"
+                    onclick="toggleContext('context1', this)">
+
+                    ▸ View context
+
+                </button>
+
+
+                <div id="context1" class="context">
+
+                    <strong>CONTEXT:</strong>
+
+                    This post appeared near the top of
+                    the feed and received significantly
+                    more visibility than nearby posts.
+
+                    <br><br>
+
+                    Posts promoting IT-approved ideas
+                    are regularly given more space on
+                    Mzanzi Connect.
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- ================= FLAGGED POST 1 ================= -->
+
+        <article class="mini-post">
+
+            <div class="mini-post-header">
+
+                <div class="mini-user">
+
+                    <div class="mini-avatar">
+                        R
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            @roots_remember
+                        </strong>
+
+                        <p>
+                            Johannesburg · 18 min ago
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <span class="flagged-label">
+                    FLAGGED
+                </span>
+
+            </div>
+
+
+            <p class="mini-post-text">
+
+                My grandmother's stories are not
+                "unverified cultural content."
+
+                They are history and knowledge.
+
+                Who gave Mzanzi the right to decide
+                what counts?
+
+                <br><br>
+
+                <span class="hashtags">
+                    #RememberOurOwn
+                </span>
+
+            </p>
+
+
+            <div class="mini-actions">
+
+                <span>
+                    ♥ 3
+                </span>
+
+                <span>
+                    💬 0
+                </span>
+
+            </div>
+
+
+            <div class="context-toggle">
+
+                <button
+                    class="context-button"
+                    onclick="toggleContext('context2', this)">
+
+                    ▸ View context
+
+                </button>
+
+
+                <div id="context2" class="context">
+
+                    <strong>CONTEXT:</strong>
+
+                    This post was flagged within 20 minutes
+                    of being posted.
+
+                    Engagement was limited and only
+                    3 likes are currently visible.
+
+                    <br><br>
+
+                    The hashtag
+                    <strong>#RememberOurOwn</strong>
+                    was also removed from the trending
+                    section.
+
+                    <br><br>
+
+                    The Drive contains records of
+                    similar removals.
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- ================= FLAGGED POST 2 ================= -->
+
+        <article class="mini-post">
+
+            <div class="mini-post-header">
+
+                <div class="mini-user">
+
+                    <div class="mini-avatar">
+                        S
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Sihle_N
+                        </strong>
+
+                        <p>
+                            Soweto · 42 min ago
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <span class="flagged-label">
+                    FLAGGED
+                </span>
+
+            </div>
+
+
+            <p class="mini-post-text">
+
+                Why are some of our languages missing
+                from the education section?
+
+                My little sister searched for information
+                in isiXhosa and almost everything she
+                found was in English.
+
+                <br><br>
+
+                If our languages are part of our history,
+                why are they so difficult to find?
+
+            </p>
+
+
+            <div class="mini-actions">
+
+                <span>
+                    ♥ 7
+                </span>
+
+                <span>
+                    💬 2
+                </span>
+
+            </div>
+
+
+            <div class="context-toggle">
+
+                <button
+                    class="context-button"
+                    onclick="toggleContext('context3', this)">
+
+                    ▸ View context
+
+                </button>
+
+
+                <div id="context3" class="context">
+
+                    <strong>CONTEXT:</strong>
+
+                    This post was flagged for
+                    "potentially misleading educational
+                    information."
+
+                    <br><br>
+
+                    The original post received 19 likes
+                    before its visibility was reduced.
+
+                    Search results for several related
+                    terms were also restricted.
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+    </section>
+
+
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside>
+
+
+        <!-- REMOVED CONTENT -->
+
+        <div class="sidebar-card">
+
+            <h3>
+                Content Removed From Mzanzi
+            </h3>
+
+
+            <div class="removed-card">
+
+                <h4>
+                    REMOVED: "Who Were We Before?"
+                </h4>
+
+
+                <p>
+
+                    This article explored the relationship
+                    between African identity, ancestry
+                    and cultural memory.
+
+                </p>
+
+
+                <p style="margin-top: 9px;">
+
+                    It was removed by IT because it was
+                    considered incompatible with approved
+                    educational information.
+
+                </p>
+
+
+                <span class="removed-status">
+                    REMOVED BY IT
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SYSTEM ACTIVITY -->
+
+        <div class="sidebar-card">
+
+            <h3>
+                System Activity
+            </h3>
+
+
+            <div class="activity">
+
+                <p>
+                    ⚠ 3 posts flagged today
+                </p>
+
+                <p>
+                    ⚠ 7 search results restricted
+                </p>
+
+                <p>
+                    ⚠ 1 trending hashtag removed
+                </p>
+
+                <p>
+                    ● Mzanzi Connect is online
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- TRENDING -->
+
+        <div class="sidebar-card">
+
+            <h3>
+                Trending
+            </h3>
+
+
+            <div class="activity">
+
+                <p>
+                    #FutureOfSouthAfrica
+                </p>
+
+                <p>
+                    #TechForEveryone
+                </p>
+
+                <p style="color:#999;">
+                    #RememberOurOwn
+                    <br>
+                    <small>
+                        No longer trending
+                    </small>
+                </p>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+</main>
+
+
+
+<footer>
+
+    Mzanzi Connect © 2026
+
+    <br><br>
+
+    Information is subject to Mzanzi Connect
+    community and IT standards.
+
+</footer>
+
+
+
+<script>
+
+    function toggleContext(id, button) {
+
+        const context = document.getElementById(id);
+
+        context.classList.toggle("open");
+
+
+        if (context.classList.contains("open")) {
+
+            button.innerHTML = "▾ Hide context";
+
+        } else {
+
+            button.innerHTML = "▸ View context";
+
+        }
+
+    }
+
+</script>
+
+
+</body>
+</html>
